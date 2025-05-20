@@ -1,0 +1,255 @@
+@import "../../app.scss";
+
+// Color Variables
+:root {
+  // Primary Colors - VS Code Dark+ inspired
+  --primary-900: #1a1b26; // Deep blue-black - main background
+  --primary-800: #24283b; // Dark blue - secondary background
+  --primary-700: #2f334d; // Muted blue - accents
+
+  // Accent Colors - Syntax highlighting inspired
+  --accent-500: #7aa2f7; // Bright blue - primary actions
+  --accent-400: #bb9af7; // Purple - highlights
+  --accent-300: #2ac3de; // Cyan - special elements
+
+  // Neutral Colors
+  --neutral-100: #c0caf5; // Light blue-white - text
+  --neutral-200: #9aa5ce; // Muted blue - secondary text
+  --neutral-700: #565f89; // Comments color
+  --neutral-800: #414868; // Dark text
+
+  // Status Colors - Terminal inspired
+  --success: #9ece6a; // Success green
+  --warning: #e0af68; // Warning yellow
+  --error: #f7768e; // Error pink
+
+  // Gradients
+  --gradient-primary: linear-gradient(
+    135deg,
+    var(--primary-800) 0%,
+    var(--primary-900) 100%
+  );
+  --gradient-accent: linear-gradient(
+    135deg,
+    var(--accent-500) 0%,
+    var(--accent-300) 100%
+  );
+
+  // VS Code colors
+  --vscode-bg: #1e1e1e;
+  --vscode-sidebar: #252526;
+  --vscode-active-tab: #1e1e1e;
+  --vscode-inactive-tab: #2d2d2d;
+  --vscode-border: #454545;
+  --vscode-text: #d4d4d4;
+  --vscode-comment: #6a9955;
+  --vscode-keyword: #569cd6;
+  --vscode-function: #dcdcaa;
+  --vscode-string: #ce9178;
+  --vscode-number: #b5cea8;
+  --vscode-line-number: #858585;
+  --vscode-scrollbar: #424242;
+  --vscode-selection: #264f78;
+}
+
+.portfolio {
+  position: relative;
+  background-color: var(--vscode-bg);
+  color: var(--neutral-100);
+
+  @include mobile {
+    height: auto;
+    min-height: 100vh;
+    overflow: visible;
+  }
+
+  .progress {
+    position: sticky;
+    top: 0;
+    left: 0;
+    padding-top: 50px;
+    text-align: center;
+    color: var(--accent-500);
+    background: var(--vscode-sidebar);
+    border-bottom: 1px solid var(--vscode-border);
+    font-size: 36px;
+    z-index: 10;
+
+    @include mobile {
+      padding-top: 20px;
+      font-size: 24px;
+    }
+
+    .progressBar {
+      height: 10px;
+      background: var(--gradient-accent);
+    }
+
+    h1 {
+      font-family: "Fira Code", monospace;
+      color: var(--vscode-function);
+      font-size: 16px;
+      padding: 8px 16px;
+
+      &::before {
+        content: "// ";
+        color: var(--vscode-comment);
+      }
+    }
+  }
+
+  .container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+
+    @include mobile {
+      height: auto;
+      padding: 20px 10px;
+    }
+
+    .wrapper {
+      max-width: 1366px;
+      height: 100%;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 50px;
+
+      @include mobile {
+        flex-direction: column;
+        height: auto;
+        gap: 20px;
+      }
+
+      .imageContainer {
+        flex: 1;
+        height: 50%;
+
+        @include mobile {
+          width: 100%;
+          max-height: 200px;
+          margin-bottom: 20px;
+        }
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          border-radius: 8px;
+
+          @include mobile {
+            object-fit: contain;
+          }
+        }
+      }
+
+      .textContainer {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+
+        @include mobile {
+          transform: none !important;
+          padding: 10px;
+          align-items: center;
+          text-align: center;
+          gap: 15px;
+        }
+
+        h2 {
+          color: var(--vscode-keyword);
+          font-family: "Fira Code", monospace;
+          font-size: 24px;
+
+          &::before {
+            content: "const ";
+            color: var(--vscode-keyword);
+          }
+
+          &::after {
+            content: " = {";
+            color: var(--vscode-text);
+          }
+        }
+
+        p {
+          color: var(--vscode-text);
+          font-family: "Fira Code", monospace;
+          font-size: 14px;
+          line-height: 1.6;
+          padding-left: 20px;
+
+          &::before {
+            content: "// ";
+            color: var(--vscode-comment);
+          }
+        }
+
+        .technologies {
+          color: var(--vscode-string);
+
+          strong {
+            color: var(--vscode-function);
+          }
+        }
+
+        .linksContainer {
+          display: flex;
+          gap: 10px;
+
+          a,
+          button {
+            font-family: "Fira Code", monospace;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            background: var(--vscode-inactive-tab);
+            border: 1px solid var(--vscode-border);
+            color: var(--vscode-text);
+            padding: 6px 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(249, 177, 122, 0.2);
+
+            &:hover {
+              background: var(--vscode-active-tab);
+              transform: none;
+              box-shadow: none;
+            }
+
+            img {
+              width: 25px;
+              height: 25px;
+              margin-inline: 6px;
+            }
+          }
+
+          .demo-disabled {
+            background: var(--primary-700);
+            color: var(--neutral-200);
+            opacity: 0.8;
+            cursor: not-allowed;
+            box-shadow: none;
+
+            &:hover {
+              transform: none;
+              background: var(--primary-700);
+              box-shadow: none;
+            }
+
+            &::after {
+              content: "🚧";
+              margin-left: 8px;
+            }
+          }
+        }
+      }
+    }
+  }
+}

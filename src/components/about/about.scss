@@ -1,0 +1,266 @@
+@import "../../app.scss";
+
+.about {
+  height: 100vh;
+  overflow: hidden;
+  background-color: var(--vscode-bg);
+  position: relative;
+
+  .wrapper {
+    max-width: 1366px;
+    height: 100%;
+    margin: auto;
+
+    .textContainer {
+      width: 50%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 30px;
+      padding: 50px;
+      position: relative;
+      z-index: 1;
+
+      @include mobile {
+        height: auto;
+        min-height: 50%;
+        width: 100%;
+        padding: 20px;
+        align-items: center;
+        text-align: center;
+        overflow: visible;
+      }
+
+      h2 {
+        font-family: "Fira Code", monospace;
+        font-size: 36px;
+        color: var(--vscode-keyword);
+        margin-bottom: 20px;
+
+        @include mobile {
+          font-size: 24px;
+        }
+      }
+
+      p {
+        font-family: "Fira Code", monospace;
+        font-size: 14px;
+        line-height: 1.6;
+        color: var(--vscode-text);
+
+        @include mobile {
+          font-size: 13px;
+          padding: 0 10px;
+          word-wrap: break-word;
+          overflow-wrap: break-word;
+        }
+
+        strong {
+          color: var(--vscode-function);
+        }
+
+        a {
+          color: var(--vscode-function);
+          text-decoration: none;
+
+          img {
+            width: 30px;
+            height: 25px;
+            margin-inline: 3px;
+            vertical-align: middle;
+            transition: transform 0.3s ease;
+
+            &:hover {
+              transform: scale(1.2);
+            }
+          }
+        }
+      }
+
+      .skillsContainer {
+        margin-top: 20px;
+
+        @include mobile {
+          width: 100%;
+          padding: 0 10px;
+        }
+
+        .skills {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 10px 40px;
+          padding-left: 20px;
+          margin-top: 10px;
+          color: var(--vscode-string);
+
+          @include mobile {
+            grid-template-columns: 1fr;
+            gap: 8px;
+            padding: 0;
+            margin-top: 15px;
+            font-size: 12px;
+          }
+
+          div {
+            font-family: "Fira Code", monospace;
+            font-size: 13px;
+
+            @include mobile {
+              font-size: 12px;
+              line-height: 1.4;
+            }
+
+            &::before {
+              content: "• ";
+              color: var(--vscode-comment);
+            }
+          }
+        }
+      }
+
+      .buttons {
+        display: flex;
+        gap: 20px;
+        margin-top: 20px;
+        position: relative;
+        z-index: 1;
+
+        @include mobile {
+          flex-wrap: wrap;
+          justify-content: center;
+          gap: 10px;
+        }
+
+        a {
+          font-family: "Fira Code", monospace;
+          font-size: 13px;
+          padding: 10px 20px;
+          background: var(--vscode-inactive-tab);
+          color: var(--vscode-text);
+          border: 1px solid var(--vscode-border);
+          border-radius: 4px;
+          cursor: pointer;
+          transition: all 0.2s ease;
+          text-decoration: none;
+          display: inline-flex;
+          gap: 8px;
+          align-items: center;
+          position: relative;
+          z-index: 1;
+
+          &::before {
+            content: "function ";
+            color: var(--vscode-keyword);
+            margin-right: 2px;
+          }
+
+          &::after {
+            content: "()";
+            color: var(--vscode-text);
+            margin-left: 2px;
+          }
+
+          @include mobile {
+            font-size: 12px;
+            padding: 8px 16px;
+            gap: 6px;
+          }
+
+          // Special styling for resume button
+          &[href*="Resume"] {
+            background: var(--vscode-bg);
+            border: 1px solid var(--vscode-function);
+            font-weight: 500;
+            box-shadow: 0 0 15px rgba(0, 255, 157, 0.3);
+            display: flex;
+            gap: 4px;
+            align-items: center;
+            color: #4ec9b0; // Bright teal color from VS Code
+
+            span {
+              color: inherit;
+            }
+
+            &::before {
+              content: "async function";
+              background: linear-gradient(
+                90deg,
+                #c586c0,
+                #569cd6
+              ); // Purple for async, blue for function
+              -webkit-background-clip: text;
+              background-clip: text;
+              color: transparent;
+            }
+
+            &::after {
+              content: "()";
+              color: inherit;
+            }
+
+            &:hover {
+              background: rgba(0, 255, 157, 0.1);
+              transform: translateY(-2px);
+              box-shadow: 0 0 20px rgba(0, 255, 157, 0.5);
+            }
+          }
+
+          &:hover {
+            background: var(--vscode-active-tab);
+            border-color: var(--vscode-function);
+          }
+        }
+      }
+    }
+  }
+
+  .imageContainer {
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    @include mobile {
+      height: 50%;
+      width: 100%;
+      top: unset;
+      bottom: 0;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      opacity: 0.4;
+      filter: brightness(0.7) contrast(0.8);
+      mix-blend-mode: luminosity;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(
+        to right,
+        var(--vscode-bg) 0%,
+        transparent 100%
+      );
+      pointer-events: none;
+    }
+  }
+
+  .slidingTextContainer {
+    position: absolute;
+    font-size: 50vh;
+    bottom: -120px;
+    white-space: nowrap;
+    color: rgba(255, 255, 255, 0.03);
+    width: 50%;
+    font-weight: bold;
+    z-index: 0;
+  }
+}

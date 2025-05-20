@@ -1,0 +1,562 @@
+@import "../../app.scss";
+
+.parallax {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background-color: var(--vscode-bg);
+
+  @include mobile {
+    padding: 20px;
+    height: 100vh;
+    min-height: -webkit-fill-available; // Fix for mobile Safari
+  }
+
+  h1 {
+    font-family: "Fira Code", monospace;
+    font-size: 72px;
+    color: var(--vscode-text);
+    text-align: center;
+    position: relative;
+    z-index: 3;
+
+    @include mobile {
+      font-size: 36px;
+      padding: 0 20px;
+    }
+
+    .name {
+      color: #00ff9d !important;
+      text-shadow: 0 0 5px #00ff9d, 0 0 8px #00ff9d, 0 0 15px #00ff9d,
+        0 0 30px rgba(0, 255, 157, 0.8), 0 0 65px rgba(0, 255, 157, 0.6),
+        0 0 75px rgba(0, 255, 157, 0.5);
+      animation: pulsate 2s infinite alternate,
+        float-text 3s ease-in-out infinite;
+      display: inline-block;
+    }
+
+    @keyframes float-text {
+      0% {
+        transform: translateY(0px) translateX(0px);
+      }
+      50% {
+        transform: translateY(-8px) translateX(5px);
+      }
+      100% {
+        transform: translateY(0px) translateX(0px);
+      }
+    }
+
+    @keyframes pulsate {
+      100% {
+        text-shadow: 0 0 3px #00ff9d, 0 0 8px #00ff9d, 0 0 12px #00ff9d,
+          0 0 25px rgba(0, 255, 157, 0.8), 0 0 55px rgba(0, 255, 157, 0.6),
+          0 0 65px rgba(0, 255, 157, 0.5);
+      }
+      0% {
+        text-shadow: 0 0 5px #00ff9d, 0 0 10px #00ff9d, 0 0 20px #00ff9d,
+          0 0 35px rgba(0, 255, 157, 0.8), 0 0 75px rgba(0, 255, 157, 0.6),
+          0 0 85px rgba(0, 255, 157, 0.5);
+      }
+    }
+
+    .role {
+      color: var(--vscode-keyword);
+      display: inline-block;
+    }
+
+    p {
+      font-size: small;
+      font-style: italic;
+      margin-top: 20px;
+    }
+    img {
+      width: 50px;
+    }
+  }
+
+  .mountains {
+    background-image: url("/mountains.png");
+    background-size: cover;
+    background-position: bottom;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 3;
+    filter: brightness(1.4) contrast(1.2) saturate(1.5);
+  }
+
+  .planets {
+    background-image: url("/planets.png");
+    background-size: cover;
+    background-position: bottom;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 2;
+    filter: brightness(1.6) contrast(1.3);
+
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to top,
+        var(--vscode-bg) 0%,
+        rgba(0, 0, 0, 0.5) 50%,
+        transparent 100%
+      );
+      opacity: 0.8;
+    }
+  }
+
+  .stars {
+    background-image: url("/stars.png");
+    background-size: cover;
+    background-position: bottom;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 1;
+    filter: brightness(1.8) contrast(1.3);
+  }
+
+  // Scroll indicator
+  .scroll-indicator {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 4;
+    font-family: "Fira Code", monospace;
+    font-size: 14px;
+    color: var(--vscode-function);
+    text-align: center;
+
+    @include mobile {
+      bottom: 20px;
+      font-size: 12px;
+      width: 100%;
+      padding: 0 20px;
+    }
+
+    &::before {
+      content: "↓";
+      font-size: 24px;
+      animation: bounce 2s infinite;
+      display: block;
+      margin-bottom: 5px;
+
+      @include mobile {
+        font-size: 18px;
+      }
+    }
+
+    &::after {
+      content: "scroll.start()";
+      color: var(--vscode-function);
+      text-shadow: 0 0 12px rgba(220, 220, 170, 0.6);
+    }
+  }
+
+  // Add code-like decorative elements
+  .code-decoration {
+    position: absolute;
+    font-family: "Fira Code", monospace;
+    color: var(--vscode-comment);
+    opacity: 0.8;
+    pointer-events: none;
+    z-index: 2;
+
+    // Line numbers
+    &.line-numbers {
+      left: 40px;
+      top: 50%;
+      transform: translateY(-50%);
+      text-align: right;
+      font-size: 14px;
+      line-height: 1.6;
+
+      @include mobile {
+        left: 5px;
+        font-size: 10px;
+        top: 40%;
+      }
+
+      span {
+        display: block;
+        color: var(--vscode-line-number);
+        text-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+      }
+    }
+
+    // Code snippets
+    &.code-snippets {
+      right: 40px;
+      top: 40px;
+      font-size: 14px;
+      text-align: left;
+
+      @include mobile {
+        right: 5px;
+        top: 80px;
+        font-size: 10px;
+      }
+
+      .comment {
+        color: var(--vscode-comment);
+        text-shadow: 0 0 12px rgba(106, 153, 85, 0.6);
+        opacity: 0.9;
+      }
+      .keyword {
+        color: var(--vscode-keyword);
+        text-shadow: 0 0 12px rgba(86, 156, 214, 0.6);
+      }
+      .string {
+        color: var(--vscode-string);
+        text-shadow: 0 0 12px rgba(206, 145, 120, 0.6);
+      }
+    }
+  }
+
+  // Adjust main content positioning
+  .content-wrapper {
+    position: relative;
+    z-index: 3;
+    text-align: center;
+    width: 100%;
+    max-width: 800px;
+
+    @include mobile {
+      margin-top: 60px; // Give space for the menu button
+    }
+
+    h1 {
+      font-family: "Fira Code", monospace;
+      font-size: 64px;
+      color: var(--vscode-text);
+      line-height: 1.2;
+      margin-bottom: 20px;
+
+      @include mobile {
+        font-size: 28px;
+        line-height: 1.4;
+        margin-bottom: 10px;
+      }
+
+      .name {
+        color: #00ff9d !important;
+        text-shadow: 0 0 5px #00ff9d, 0 0 8px #00ff9d, 0 0 15px #00ff9d,
+          0 0 30px rgba(0, 255, 157, 0.8), 0 0 65px rgba(0, 255, 157, 0.6),
+          0 0 75px rgba(0, 255, 157, 0.5);
+        animation: pulsate 2s infinite alternate,
+          float-text 3s ease-in-out infinite;
+        display: inline-block;
+      }
+
+      @keyframes float-text {
+        0% {
+          transform: translateY(0px) translateX(0px);
+        }
+        50% {
+          transform: translateY(-8px) translateX(5px);
+        }
+        100% {
+          transform: translateY(0px) translateX(0px);
+        }
+      }
+
+      @keyframes pulsate {
+        100% {
+          text-shadow: 0 0 3px #00ff9d, 0 0 8px #00ff9d, 0 0 12px #00ff9d,
+            0 0 25px rgba(0, 255, 157, 0.8), 0 0 55px rgba(0, 255, 157, 0.6),
+            0 0 65px rgba(0, 255, 157, 0.5);
+        }
+        0% {
+          text-shadow: 0 0 5px #00ff9d, 0 0 10px #00ff9d, 0 0 20px #00ff9d,
+            0 0 35px rgba(0, 255, 157, 0.8), 0 0 75px rgba(0, 255, 157, 0.6),
+            0 0 85px rgba(0, 255, 157, 0.5);
+        }
+      }
+
+      .role {
+        color: var(--vscode-keyword);
+        display: block;
+        margin-top: 5px;
+
+        @include mobile {
+          font-size: 24px;
+        }
+      }
+    }
+
+    // Add subtitle
+    .subtitle {
+      font-family: "Fira Code", monospace;
+      font-size: 16px;
+      color: var(--vscode-comment);
+      margin-top: 15px;
+      opacity: 0.9;
+
+      @include mobile {
+        font-size: 12px;
+        margin-top: 10px;
+        padding: 0 20px;
+      }
+
+      &::before {
+        content: "// ";
+        color: var(--vscode-comment);
+      }
+    }
+  }
+
+  // Add floating elements
+  .floating-elements {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+
+    @include mobile {
+      position: fixed; // Change to fixed for better mobile positioning
+      width: 100%;
+      height: 100%;
+    }
+
+    .element {
+      position: absolute;
+      font-family: "Fira Code", monospace;
+      color: var(--vscode-comment);
+      opacity: 0.8;
+      text-shadow: 0 0 15px rgba(106, 153, 85, 0.7);
+      animation: float 8s infinite ease-in-out;
+      font-size: 14px;
+
+      @include mobile {
+        font-size: 12px;
+      }
+
+      &:nth-child(1) {
+        top: 15%;
+        left: 15%;
+
+        @include mobile {
+          top: 10%;
+          left: 10%;
+        }
+      }
+      &:nth-child(2) {
+        top: 25%;
+        right: 20%;
+        animation-delay: -2s;
+
+        @include mobile {
+          top: 15%;
+          right: 10%;
+        }
+      }
+      &:nth-child(3) {
+        bottom: 30%;
+        left: 25%;
+        animation-delay: -4s;
+
+        @include mobile {
+          bottom: 25%;
+          left: 15%;
+        }
+      }
+      &:nth-child(4) {
+        bottom: 25%;
+        right: 25%;
+        animation-delay: -6s;
+
+        @include mobile {
+          bottom: 20%;
+          right: 15%;
+        }
+      }
+    }
+  }
+
+  // Background elements
+  .mountains,
+  .planets,
+  .stars {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+
+    @include mobile {
+      background-position: center center;
+    }
+  }
+
+  // Tech icons parallax styling
+  .tech-icons {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    overflow: visible;
+
+    .icon {
+      position: absolute;
+      width: 55px;
+      height: 55px;
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      opacity: 0.85;
+      transition: all 0.3s ease;
+      z-index: 2;
+      transform-origin: center;
+      scale: 1.2;
+
+      &:nth-child(1) {
+        top: 10%;
+        left: 8%;
+        animation-delay: 0s;
+      }
+      &:nth-child(2) {
+        top: 15%;
+        right: 8%;
+        animation-delay: -1s;
+      }
+      &:nth-child(3) {
+        bottom: 25%;
+        left: 12%;
+        animation-delay: -2s;
+      }
+      &:nth-child(4) {
+        bottom: 30%;
+        right: 12%;
+        animation-delay: -3s;
+      }
+      &:nth-child(5) {
+        top: 20%;
+        right: 25%;
+        animation-delay: -4s;
+      }
+      &:nth-child(6) {
+        bottom: 20%;
+        left: 25%;
+        animation-delay: -5s;
+      }
+      &:nth-child(7) {
+        top: 25%;
+        left: 30%;
+        animation-delay: -6s;
+      }
+      &:nth-child(8) {
+        bottom: 35%;
+        right: 30%;
+        animation-delay: -7s;
+      }
+
+      &.react {
+        filter: drop-shadow(0 0 25px rgba(97, 218, 251, 1))
+          drop-shadow(0 0 35px rgba(97, 218, 251, 1))
+          drop-shadow(0 0 45px rgba(97, 218, 251, 0.9)) brightness(2);
+      }
+      &.javascript {
+        filter: drop-shadow(0 0 25px rgba(247, 223, 30, 1))
+          drop-shadow(0 0 35px rgba(247, 223, 30, 1))
+          drop-shadow(0 0 45px rgba(247, 223, 30, 0.9)) brightness(2);
+      }
+      &.typescript {
+        filter: drop-shadow(0 0 25px rgba(49, 120, 198, 1))
+          drop-shadow(0 0 35px rgba(49, 120, 198, 1))
+          drop-shadow(0 0 45px rgba(49, 120, 198, 0.9)) brightness(2);
+      }
+      &.python {
+        filter: drop-shadow(0 0 25px rgba(55, 118, 171, 1))
+          drop-shadow(0 0 35px rgba(55, 118, 171, 1))
+          drop-shadow(0 0 45px rgba(55, 118, 171, 0.9)) brightness(2);
+      }
+      &.csharp {
+        filter: drop-shadow(0 0 25px rgba(104, 33, 122, 1))
+          drop-shadow(0 0 35px rgba(104, 33, 122, 1))
+          drop-shadow(0 0 45px rgba(104, 33, 122, 0.9)) brightness(2);
+      }
+      &.docker {
+        filter: drop-shadow(0 0 25px rgba(13, 136, 209, 1))
+          drop-shadow(0 0 35px rgba(13, 136, 209, 1))
+          drop-shadow(0 0 45px rgba(13, 136, 209, 0.9)) brightness(2);
+      }
+      &.html {
+        filter: drop-shadow(0 0 25px rgba(228, 77, 38, 1))
+          drop-shadow(0 0 35px rgba(228, 77, 38, 1))
+          drop-shadow(0 0 45px rgba(228, 77, 38, 0.9)) brightness(2);
+      }
+      &.css {
+        filter: drop-shadow(0 0 25px rgba(21, 114, 182, 1))
+          drop-shadow(0 0 35px rgba(21, 114, 182, 1))
+          drop-shadow(0 0 45px rgba(21, 114, 182, 0.9)) brightness(2);
+      }
+
+      animation: float 8s ease-in-out infinite;
+    }
+  }
+}
+
+@keyframes bounce {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+
+// Add neon glow to elements
+.neon-glow {
+  text-shadow: 0 0 15px rgba(0, 255, 157, 0.7), 0 0 25px rgba(0, 255, 157, 0.5),
+    0 0 35px rgba(0, 255, 157, 0.3);
+}
+
+// Add subtle scan lines effect
+.scan-lines {
+  &::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.1) 0px,
+      rgba(0, 0, 0, 0.1) 1px,
+      transparent 1px,
+      transparent 2px
+    );
+    pointer-events: none;
+    z-index: 10;
+    opacity: 0.3;
+  }
+}
+
+// Add floating animation
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-20px) rotate(5deg);
+  }
+}
