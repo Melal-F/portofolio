@@ -42,8 +42,7 @@ const About = () => {
           <motion.h2 variants={textVariants}>About Me</motion.h2>
           <motion.p variants={textVariants}>
             🚀Hey there, I'm <motion.strong>Melal</motion.strong>, a
-            passionate Software Developer in Phoenix, AZ, armed with a Master's
-            in Data Analytics. My coding journey began with SQL and Python for
+            passionate Software Developer My coding journey began with SQL and Python for
             data analysis and evolving into{" "}
             <motion.strong>Software Development</motion.strong> through building
             many cool projects. Outside the tech world, I find joy in learning
